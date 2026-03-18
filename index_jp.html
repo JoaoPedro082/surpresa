@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontro 🦆</title>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #c8102e;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .painel {
+            margin: 40px auto;
+            background-color: white;
+            width: 500px;
+            max-width: 90%;
+            height: 520px;
+            border-radius: 20px;
+            text-align: center;
+            padding: 50px 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #sim, #nao {
+            height: 50px;
+            width: 120px;
+            background-color: #c8102e;
+            border: 3px solid white;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.1s;
+        }
+
+        #animation-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            color: white;
+            text-align: center;
+        }
+
+        #animation-screen h1 {
+            font-size: 3rem;
+            margin: 20px 0;
+            text-shadow: 0 0 25px #ff69b4;
+            animation: glow 2s infinite alternate;
+        }
+
+        svg {
+            max-width: 92vw;
+            max-height: 45vh;
+        }
+
+        #heartbeat-line {
+            fill: none;
+            stroke: #ff69b4;
+            stroke-width: 4.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 4000;
+            stroke-dashoffset: 4000;
+            filter: drop-shadow(0 0 12px #ff69b4);
+            animation: draw 7s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+        }
+
+        #heart {
+            fill: #ff9999;
+            stroke: #ff69b4;
+            stroke-width: 3;
+            opacity: 0;
+            transform: scale(0.8);
+            transform-origin: center;
+            animation: 
+                fadeInPulse 3s 6.5s forwards,
+                heartbeat 1.4s 9.8s infinite ease-in-out;
+        }
+
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        @keyframes fadeInPulse { 
+            0% { opacity: 0; transform: scale(0.8); } 
+            40% { opacity: 1; transform: scale(1.35); }
+            100% { transform: scale(1); }
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            35% { transform: scale(1.22); }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 15px #ff69b4; }
+            to { text-shadow: 0 0 40px #ff1493, 0 0 55px #ff69b4; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="musicaFundo" src="music.mp3" preload="auto"></audio>
+
+    <div class="painel" id="painel">
+        <h2>A vida é mais feliz com vc, mesmo a distância...</h2>
+        <h1>Aceita ser meu amorzinho<br>"🦆DAVIDA"? ❤️</h1>
+
+        <div class="botoes">
+            <button id="sim" onclick="handleSim()">Sim</button>
+            <button onmouseover="fuja()" id="nao">Não</button>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <img src="https://i.pinimg.com/originals/97/23/82/972382260bbcaf3c4fbb318b81672707.gif" alt="gif romântico" width="280">
+        </div>
+    </div>
+
+    <div id="animation-screen">
+        <svg viewBox="0 0 503 109" xmlns="http://www.w3.org/2000/svg">
+            <path id="heartbeat-line" d="M5.32 78.13c.96-.01 5-8.5 5.54-8.54.58-.05 6.1 8.51 7.1 8.51 3.66 0 9.29.06 10.71.05 2.53-.01 4.82-72.88 4.82-72.88l4.76 97.28 3.97-24.45 20.45-.22C64 77.86 77.1 63.66 78.36 63.8c1.31.15 6.68 14.08 7.94 14.07 2.3-.03 33.32.04 35.76.02.96 0 5-8.5 5.53-8.53.59-.05 6.1 8.51 7.1 8.5 3.66 0 9.3.07 10.72.06 2.53-.02 4.81-72.89 4.81-72.89l4.77 97.28 3.97-24.44s83.34-3.33 74.69 7.67c-8.65 11-45.3-42.94-31.65-53.58 25.6-19.96 49.96 36.94 40.26 36.5-12.2-.53 1.8-62.32 23.41-51.7 32.24 15.86-17.56 84.92-26.4 81.77-5.73-2.05-.68-21.68 31.4-26.58 26.65-6.42 29.5 2.35 52.62 7.11 2.53-.02 4.82-72.89 4.82-72.89l4.76 97.28 3.97-24.44 20.45-.22c1.31-.02 14.41-14.22 15.68-14.07 1.32.15 6.7 14.08 7.95 14.07 2.29-.03 33.32.04 35.76.02.95 0 5-8.5 5.53-8.54.58-.04 6.1 8.52 7.1 8.52 3.66 0 9.3.06 10.72.05 2.53-.02 4.81-72.89 4.81-72.89l4.77 97.28 3.97-24.44 20.45-.23c1.31-.01 14.4-14.22 15.68-14.07 1.32.16 6.69 14.09 7.94 14.07"/>
+            <path id="heart" d="M213.35 29.43c19.41-15.19 33.68 10.86 37.73 18.82-.28-13.61 11.64-40.98 25.94-34.01 32.3 15.74-15.88 83.8-26.4 81.76-13.24-9-51.35-53.3-37.27-66.57Z"/>
+        </svg>
+    </div>
+
+    <script>
+        function fuja() {
+            var botaoNao = document.getElementById("nao");
+            botaoNao.style.position = "fixed";
+            var larguraJanela = window.innerWidth;
+            var alturaJanela = window.innerHeight;
+            var maxX = larguraJanela - botaoNao.offsetWidth;
+            var maxY = alturaJanela - botaoNao.offsetHeight;
+            var aleatorioX = Math.floor(Math.random() * maxX);
+            var aleatorioY = Math.floor(Math.random() * maxY);
+            botaoNao.style.left = aleatorioX + "px";
+            botaoNao.style.top = aleatorioY + "px";
+        }
+
+        function handleSim() {
+            // Toca a música no clique
+            var audio = document.getElementById("musicaFundo");
+            audio.play().catch(e => console.log("Erro ao tocar áudio:", e));
+
+            alert("Parabéns, Você fez uma bela escolha, só não mais bela que você :) ❤️");
+
+            document.getElementById("painel").style.display = "none";
+            document.getElementById("animation-screen").style.display = "flex";
+
+            setTimeout(() => {
+                const screen = document.getElementById("animation-screen");
+                screen.innerHTML = `
+                    <div style="background: #fff; color: #333; padding: 30px; border-radius: 20px; width: 85%; max-width: 450px; font-family: 'Courier New', Courier, monospace; box-shadow: 0 0 25px rgba(200, 16, 46, 0.5); border: 2px solid #c8102e;">
+                        <h2 style="text-align: center; color: #c8102e; margin-bottom: 5px;">PROJETO: DAVID & EMILLY</h2>
+                        <p style="text-align: center; font-size: 0.8rem; color: #666; margin-top: 0;">Status: Conexão Estável e Evoluindo</p>
+                        <hr style="border: 0; border-top: 1px dashed #ccc;">
+                        <p style="margin-top: 20px; font-weight: bold; text-align: center;">TEMPO DE CONVERSA MONITORADO:</p>
+                        <div id="contador" style="font-size: 1.2rem; text-align: center; background: #f9f9f9; padding: 15px; border-radius: 10px; color: #c8102e; font-weight: bold;"></div>
+                        <p style="margin-top: 20px; font-size: 0.9rem; line-height: 1.5;">
+                            <strong>Nota Técnica:</strong> Foi detectada uma eficiência de 100% nas trocas de mensagens e um coeficiente de saudade acima da média permitida.
+                        </p>
+                        <div style="text-align: center; margin-top: 15px; font-size: 25px;">🥰🥰🥰</div>
+                    </div>
+                `;
+                atualizarContador();
+            }, 12500);
+        }
+
+        function atualizarContador() {
+            const dataInicio = new Date('2026-02-18T00:00:00'); 
+            setInterval(() => {
+                const agora = new Date();
+                const diff = agora - dataInicio;
+                const meses = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44));
+                const dias = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30.44);
+                const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutos = Math.floor((diff / (1000 * 60)) % 60);
+                const segundos = Math.floor((diff / 1000) % 60);
+
+                const elementoContador = document.getElementById("contador");
+                if (elementoContador) {
+                    elementoContador.innerHTML = `${meses}m ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
